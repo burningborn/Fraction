@@ -10,8 +10,6 @@ using namespace std;
 #define delimiter "\n----------------------------------------------------------------------------------------\n"
 
 void menu();
-void Seter();
-//void Numbers();
 
 class Fraction   //Описывает простую дробь
 {

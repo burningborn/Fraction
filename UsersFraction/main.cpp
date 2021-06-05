@@ -7,7 +7,7 @@ using namespace std;
 
 //using
 #define tab "\t"
-#define delimiter "\n-----------------------------------------------------------------------------------\n"
+#define delimiter "\n----------------------------------------------------------------------------------------\n"
 
 void menu();
 void Seter();
@@ -15,30 +15,31 @@ void Seter();
 
 class Fraction   //Описывает простую дробь
 {
-	int a;    //Числитель
-	int b;    //Знаменатель
+	int chisl;    //Числитель
+	int znam;    //Знаменатель
 public:
-	int get_a()const
+	int get_chisl()const
 	{
-		return a;
+		return chisl;
 	}
-	int get_b()const
+	int get_znam()const
 	{
-		return b;
+		return znam;
 	}
-	void set_a(int a)
+	void set_chisl(int chisl)
 	{
-		this->a = a;
+		this->chisl = chisl;
 	}
-	void set_b(int b)
+	void set_znam(int znam)
 	{
-		this->b = b;
+		this->znam = znam;
 	}
 
-	Fraction(int a = 0, int b = 0)
+	Fraction(int chisl = 0, int znam = 0)
 	{
-		this->a = a;
-		this->b = b;
+		
+		this->chisl = chisl;
+		this->znam = znam;
 	}
 
 	~Fraction()
@@ -46,22 +47,30 @@ public:
 		//cout << "Destructor:\t " << this << endl;
 	}
 
+	//Fraction& operator= (const Fraction& other)
+	//{
+	//	
+	//	this->chisl = other.chisl;
+	//	this->znam = other.znam;
+	//	return *this;
+	//}
+
 	Fraction operator+(const Fraction& other)const
 	{
 		Fraction result;
-		if (this->b != other.b)
+		if (this->znam != other.znam)
 		{
-			int temp_this_a = this->a;
-			int temp_other_a = other.a;
-			temp_this_a *= other.b;
-			temp_other_a *= this->b;
-			result.a = temp_this_a + temp_other_a;
-			result.b = this->b * other.b;
+			int temp_this_chisl = this->chisl;
+			int temp_other_chisl = other.chisl;
+			temp_this_chisl *= other.znam;
+			temp_other_chisl *= this->znam;
+			result.chisl = temp_this_chisl + temp_other_chisl;
+			result.znam = this->znam * other.znam;
 		}
 		else
 		{
-			result.a = this->a + other.a;
-			result.b = this->b;
+			result.chisl = this->chisl + other.chisl;
+			result.znam = this->znam;
 		}
 		result.simplification();
 		return result;
@@ -70,21 +79,21 @@ public:
 	Fraction operator-(const Fraction& other)const
 	{
 		Fraction result;
-		if (this->b != other.b)
+		if (this->znam != other.znam)
 		{
-			int temp_this_a = this->a;
-			int temp_other_a = other.a;
-			temp_this_a *= other.b;
-			temp_other_a *= this->b;
-			result.a = temp_this_a - temp_other_a;
-			result.b = this->b * other.b;
+			int temp_this_chisl = this->chisl;
+			int temp_other_chisl = other.chisl;
+			temp_this_chisl *= other.znam;
+			temp_other_chisl *= this->znam;
+			result.chisl = temp_this_chisl - temp_other_chisl;
+			result.znam = this->znam * other.znam;
 		}
 		else
 		{
-			result.a = this->a - other.a;
-			result.b = this->b;
+			result.chisl = this->chisl - other.chisl;
+			result.znam = this->znam;
 		}
-		//result.simplification();
+		result.simplification();
 		return result;
 	}
 
@@ -92,8 +101,8 @@ public:
 	{
 		Fraction result;
 
-		result.a = this->a * other.a;
-		result.b = this->b * other.b;
+		result.chisl = this->chisl * other.chisl;
+		result.znam = this->znam * other.znam;
 
 		result.simplification();
 		return result;
@@ -105,10 +114,10 @@ public:
 		Fraction divider;
 		Fraction result;
 
-		divider.a = other.b;
-		divider.b = other.a;
-		dividend.a = this->a;
-		dividend.b = this->b;
+		divider.chisl = other.znam;
+		divider.znam = other.chisl;
+		dividend.chisl = this->chisl;
+		dividend.znam = this->znam;
 		result = dividend * divider;
 
 		//result.simplification();
@@ -120,10 +129,10 @@ public:
 
 		Fraction One, Two;
 
-		One.a = this->a;
-		One.b = this->b;
-		Two.a = this->b;
-		Two.b = this->b;
+		One.chisl = this->chisl;
+		One.znam = this->znam;
+		Two.chisl = this->znam;
+		Two.znam = this->znam;
 
 		*this = One + Two;
 		return *this;
@@ -133,10 +142,10 @@ public:
 	{
 		Fraction result(*this);
 		Fraction One, Two;
-		One.a = this->a;
-		One.b = this->b;
-		Two.a = this->b;
-		Two.b = this->b;
+		One.chisl = this->chisl;
+		One.znam = this->znam;
+		Two.chisl = this->znam;
+		Two.znam = this->znam;
 
 		*this = One + Two;
 		return result;
@@ -145,10 +154,10 @@ public:
 	Fraction& operator --() //prefix decrement
 	{
 		Fraction One, Two;
-		One.a = this->a;
-		One.b = this->b;
-		Two.a = this->b;
-		Two.b = this->b;
+		One.chisl = this->chisl;
+		One.znam = this->znam;
+		Two.chisl = this->znam;
+		Two.znam = this->znam;
 
 		*this = One - Two;
 		return *this;
@@ -158,10 +167,10 @@ public:
 	{
 		Fraction result(*this);
 		Fraction One, Two;
-		One.a = this->a;
-		One.b = this->b;
-		Two.a = this->b;
-		Two.b = this->b;
+		One.chisl = this->chisl;
+		One.znam = this->znam;
+		Two.chisl = this->znam;
+		Two.znam = this->znam;
 
 		*this = One - Two;
 		return result;
@@ -198,8 +207,8 @@ public:
 	Fraction& simplification()
 	{
 		Fraction result;
-		int tempA = result.a = this->a;
-		int tempB = result.b = this->b;
+		int tempA = result.chisl = this->chisl;
+		int tempB = result.znam = this->znam;
 
 		while (tempA != tempB) // алгоритм Евклида
 		{
@@ -207,27 +216,132 @@ public:
 			tempB = tempB - tempA;
 		}
 
-		result.a /= tempA;
-		result.b /= tempA;
+		result.chisl /= tempA;
+		result.znam /= tempA;
 		*this = result;
 		return *this;
 	}
 
-
+	Fraction& FillObject()
+	{
+		int number = 0;
+		
+		cout << "\n  Введите  числитель  дроби: "; cin >> number; set_chisl(number);
+		cout << "  Введите знаменатель дроби: "; cin >> number; set_znam(number);
+		return *this;
+	}
 
 	void print()
 	{
-		if (a / b > 0)
+		if (chisl / znam > 0)
 		{
-			int Integer = a / b;
-			int  a2 = a % b;
+			int Integer = chisl / znam;
+			int  a2 = chisl % znam;
 			if(a2==0){ cout << tab << Integer << endl; }
-			else { cout << tab << Integer << " " << a2 << "/" << b << endl; }
+			else { cout << tab << Integer << " " << a2 << "/" << znam << endl; }
 		}
 		else
 		{
-			cout << tab << "   " << a << "/" << b << endl;
+			cout << tab << "   " << chisl << "/" << znam << endl;
 		}
+	}
+
+	Fraction& action(Fraction& other)
+	{
+		Fraction Result;
+			int key = 1;
+		do
+		{
+			cout << "  Выберите действие: ";
+			cin >> key;
+		} while (key < 1 && key > 12);
+
+		switch (key)
+		{
+		case 1:
+			cout << "  Сложение \n"; 
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this + other;	
+			cout << "\n  Сумма дробей А и В равна: ";
+			break;
+		case 2: 
+			cout << "  Вычитание \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this - other;
+			cout << "\n  Разность дробей А и В равна: ";
+			break;
+		case 3: 
+			cout << "  Умножение \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this * other;
+			cout << "\n  Произведение дробей А и В равно: ";
+			break;
+		case 4: 
+			cout << "  Деление \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this / other;
+			cout << "\n  Частное дробей А и В равно: ";
+			break;
+		case 5:
+			cout << "  Префиксный инкремент \n";
+			Result = *this;
+			++Result;
+			cout << "\n  Префиксный инкремент числа А равен: ";
+			break;
+		case 6:
+			cout << "  Постфиксный инкремент \n";
+			Result = *this;
+			Result++;
+			cout << "\n  Постфиксный инкремент числа А равен: ";
+			break;
+		case 7:
+			cout << "  Префиксный декремент \n";
+			Result = *this;
+			--Result;
+			cout << "\n  Префиксный декремент числа А равен: ";
+			break;
+		case 8:
+			cout << "  Постфиксный декремент \n";
+			Result = *this;
+			Result--;
+			cout << "\n  Постфиксный декремент числа А равен: ";
+			break;
+		case 9:
+			cout << "  Прибавить - равно \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this += other;
+			cout << "\n  Прибавить - равно дробей А и В равно: ";
+			break;
+		case 10: 
+			cout << "  Отнять - равно \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this -= other;
+			cout << "\n  Отнять - равно дробей А и В равно: ";
+			break;
+		case 11: 
+			cout << "  Умножить - равно \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this *= other;
+			cout << "\n  Умножить - равно дробей А и В равно: ";
+			break;
+		case 12:
+			cout << "  Разделить - равно \n";
+			other.FillObject();
+			cout << "  B = "; other.print();
+			Result = *this /= other;
+			cout << "\n  Разделить - равно дробей А и В равно: ";
+			break;
+		default:
+			break;
+		}
+		return Result;
 	}
 };
 
@@ -235,136 +349,41 @@ void main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	cout << " \n\t ДЕЙСТВИЯ С КЛАССОМ ПРОСТЫХ ДРОБЕЙ " << endl;
+	Fraction A;
+	Fraction B;
+	Fraction C;
+	char Loop = 28;
+	
+	do
+	{
+		menu();
+		A.FillObject();
+		cout << "  A = "; A.print();
+		C = A.action(B);
+		C.print();
+		cout << delimiter << endl;
+		cout << "  Мы знаем: Вам понравилось пользоваться нашим калькуляторо '2B - Fraction'! \n  Хотите поработать ещё - нажмите любую клавишу.\n  Выход - Esc " << endl;
+		Loop = _getch();
 
-	//cout << delimiter << endl;	
-
-	/*cout << "Объект A:\t "; A.print();
-	cout << "Объект B: \t"; B.print();
-	cout << "Объект D: \t"; D.print();
-	D.simplification();
-	cout << "Объект D упрощенный: "; D.print();*/
-
-	cout << delimiter << endl;
-
-	menu();
-
-	/*C = A + B; cout << "Сложение : C = A + B "; C.print();
-	C = A - B; cout << "Вычитание: C = A - B "; C.print();
-	C = A * B; cout << "Умножение: C = A * B "; C.print();
-	C = A / B; cout << "Деление  : C = A / B "; C.print();
-
-	cout << delimiter << endl;
-
-	D = ++C; cout << "Инкремент префиксный : D = ++C "; D.print();
-	D = C++; cout << "Инкремент постфиксный: D = C++ "; D.print();
-	cout << "Инкремент постфиксный: C++ "; C.print();
-
-	cout << delimiter << endl;
-
-	D = --C; cout << "Декремент префиксный : D = --C "; C.print();
-	D = C--; cout << "Декремент постфиксный: D = C-- "; D.print();
-	cout << "Декремент постфиксный: C--; "; C.print();
-
-	cout << delimiter << endl;
-
-	A += B; cout << "Плюс   -    равно: A += B "; A.print();
-	A -= B; cout << "Минус   -   равно: A -= B "; A.print();
-	A *= B; cout << "Умножить -  равно: A *= B "; A.print();
-	A /= B; cout << "Разделить - равно: A /= B "; A.print();*/
+	} while (Loop != 27);
 }
 
 void menu()
 {
-	string cases[12]
+	system("CLS");
+	cout << " \n\t\t  Калькулятор дробей - 2B - СRUSHER_#1 " << endl;
+
+	string cases[4]
 	{
-		"Сложение : - 1 ",
-		"Вычитание: - 2 ",
-		"Умножение: - 3 ",
-		"Деление  : - 4 ",
-		"Инкремент преф: - 5 ",
-		"Инкремент пост: - 6 ",
-		"Декремент преф: - 7 ",
-		"Декремент пост: - 8 ",
-		"Декремент пост: - 9 ",
-		"Декремент пост: - 10 ",
-		"Декремент пост: - 11 ",
-		"Декремент пост: - 12 "
+		"  Сложение : + 1        Инкремент  преф (++X): - 5         Плюс -  равно    (+=) : - 9 ",
+		"  Вычитание: - 2        Инкремент  пост (X++): - 6         Минус - равно    (-=) : - 10 ",
+		"  Умножение: * 3        Декремент  преф (--X): - 7         Умножить - равно (*=) : - 11 ",
+		"  Деление  : / 4        Декремент  пост (X--): - 8         Делить  -  равно (/=) : - 12 ",
 	};
-
-	for (int i = 0; i < 12; i++)
+	cout << delimiter << endl;
+	for (int i = 0; i < 4; i++)
 	{
-		cout << cases[i] << endl;
-		if ((i + 1) % 4 == 0)
-		{
-			cout << "------------------------------" << endl;
-		}
+		cout << cases[i] << endl;		
 	}	
-
-	Fraction A;
-	Fraction B;
-	Fraction C;
-	Fraction D;
-	int number = 0;
-	cout << "\nвведите  числитель  первого числа: "; cin >> number; A.set_a(number);
-	cout << "\nвведите знаменатель первого числа: "; cin >> number; A.set_b(number);
-	cout << "\nвведите  числитель  второго числа: "; cin >> number; B.set_a(number);
-	cout << "\nвведите знаменатель второго числа: "; cin >> number; B.set_b(number);
-
-	cout << "Выберите действие: " << endl;
-	int key = 0;
-	cin >> key;
-
-	switch (key)
-	{
-	case 1: C = A + B;
-		break;
-	case 2: C = A - B;
-		break;
-	case 3: C = A * B;
-		break;
-	case 4: C = A / B;
-		break;
-	case 5:
-		break;
-	case 6:
-		break;
-	case 7:
-		break;
-	case 8:
-		break;
-	case 9: A += B;
-		break;
-	case 10: A -= B;
-		break;
-	case 11: A *= B;
-		break;
-	case 12:A /= B;
-		break;
-	default:
-		break;
-	}
-	C.print();
+	cout << delimiter << endl;
 }
-
-void seter()
-{
-	
-	/*int a1 = this->a;
-	int b1 = this->b;
-	int a2 = other.a;
-	int b2 = other.b;*/
-	/*
-	int a1; cin >> a1;
-	this->a = (*this).set_a(a1);
-	
-	int b1; cin >> b1;
-	a.set_b(b1);
-	
-	int a2; cin >> a2;
-	b.set_a(a2);
-	
-	int b2; cin >> b2;
-	b.set_b(b2);*/
-}
-

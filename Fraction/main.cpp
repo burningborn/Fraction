@@ -9,12 +9,12 @@ using namespace std;
 
 class Fraction   //Описывает простую дробь
 {
-	 int a;    //Числитель
+	 int chisl;    //Числитель
 	 int b;    //Знаменатель
 public:
 	 int get_a()const
 	{
-		return a;
+		return chisl;
 	}
 	 int get_b()const
 	{
@@ -22,7 +22,7 @@ public:
 	}
 	void set_a(int a)
 	{
-		this->a = a;
+		this->chisl = a;
 	}
 	void set_b(int b)
 	{
@@ -31,7 +31,7 @@ public:
 					
 	Fraction(int a = 0, int b = 0)
 	{		
-		this->a = a;
+		this->chisl = a;
 		this->b = b;		
 	}
 	
@@ -45,16 +45,16 @@ public:
 		Fraction result;
 		if (this->b != other.b)
 		{
-			int temp_this_a = this->a;
-			int temp_other_a = other.a;
+			int temp_this_a = this->chisl;
+			int temp_other_a = other.chisl;
 			temp_this_a *= other.b;
 			temp_other_a *= this->b;
-			result.a = temp_this_a + temp_other_a;
+			result.chisl = temp_this_a + temp_other_a;
 			result.b = this->b * other.b;
 		}
 		else
 		{
-			result.a = this->a + other.a;
+			result.chisl = this->chisl + other.chisl;
 			result.b = this->b;
 		}
 		result.simplification();
@@ -66,16 +66,16 @@ public:
 		Fraction result;
 		if (this->b != other.b)
 		{
-			int temp_this_a = this->a;
-			int temp_other_a = other.a;
+			int temp_this_a = this->chisl;
+			int temp_other_a = other.chisl;
 			temp_this_a *= other.b;
 			temp_other_a *= this->b;
-			result.a = temp_this_a - temp_other_a;
+			result.chisl = temp_this_a - temp_other_a;
 			result.b = this->b * other.b;
 		}
 		else
 		{
-			result.a = this->a - other.a;
+			result.chisl = this->chisl - other.chisl;
 			result.b = this->b;
 		}
 		result.simplification();
@@ -86,7 +86,7 @@ public:
 	{
 		Fraction result;
 		
-			result.a = this->a * other.a;
+			result.chisl = this->chisl * other.chisl;
 			result.b = this->b * other.b;
 
 			result.simplification();
@@ -99,9 +99,9 @@ public:
 		Fraction divider;
 		Fraction result;
 
-		divider.a = other.b;
-		divider.b = other.a;
-		dividend.a = this->a;
+		divider.chisl = other.b;
+		divider.b = other.chisl;
+		dividend.chisl = this->chisl;
 		dividend.b = this->b;
 		result = dividend * divider;
 
@@ -114,9 +114,9 @@ public:
 		
 		Fraction One, Two;
 
-		One.a = this->a;
+		One.chisl = this->chisl;
 		One.b = this->b;
-		Two.a = this->b;
+		Two.chisl = this->b;
 		Two.b = this->b;
 		
 		*this = One + Two;
@@ -127,9 +127,9 @@ public:
 	{
 		Fraction result(*this);
 		Fraction One, Two;
-		One.a = this->a;
+		One.chisl = this->chisl;
 		One.b = this->b;
-		Two.a = this->b;
+		Two.chisl = this->b;
 		Two.b = this->b;
 
 		*this = One + Two;
@@ -139,9 +139,9 @@ public:
 	Fraction& operator --() //prefix decrement
 	{
 		Fraction One, Two;
-		One.a = this->a;
+		One.chisl = this->chisl;
 		One.b = this->b;
-		Two.a = this->b;
+		Two.chisl = this->b;
 		Two.b = this->b;
 
 		*this = One - Two;
@@ -152,9 +152,9 @@ public:
 	{
 		Fraction result(*this);
 		Fraction One, Two;
-		One.a = this->a;
+		One.chisl = this->chisl;
 		One.b = this->b;
-		Two.a = this->b;
+		Two.chisl = this->b;
 		Two.b = this->b;
 
 		*this = One - Two;
@@ -192,7 +192,7 @@ public:
 	Fraction& simplification ()
 	{		
 		Fraction result;	
-		int tempA = result.a = this->a;
+		int tempA = result.chisl = this->chisl;
 		int tempB = result.b = this->b;
 		 			
 		if (tempA < 0)tempA *= -1;
@@ -202,7 +202,7 @@ public:
 				if (tempA > tempB)swap(tempA, tempB);
 				tempB = tempB - tempA;
 			}
-		result.a /= tempA;
+		result.chisl /= tempA;
 		result.b /= tempA;
 		*this = result;
 		return *this;
@@ -210,16 +210,16 @@ public:
 
 	void print()
 	{
-		if (a / b > 0)
+		if (chisl / b > 0)
 		{
-			int Integer = a / b;
-			int  a2 = a % b;
+			int Integer = chisl / b;
+			int  a2 = chisl % b;
 			if (a2 == 0) { cout << tab << Integer << endl; }
 			else { cout << tab << Integer << " " << a2 << "/" << b << endl; }
 		}
 		else
 		{
-			cout << tab << "   " << a << "/" << b << endl;
+			cout << tab << "   " << chisl << "/" << b << endl;
 		}
 	}
 };

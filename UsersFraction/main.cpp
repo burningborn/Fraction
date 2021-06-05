@@ -208,12 +208,13 @@ public:
 		int tempA = result.chisl = this->chisl;
 		int tempB = result.znam = this->znam;
 
+		if (tempA < 0)tempA *= -1;
+
 		while (tempA != tempB) // алгоритм Евклида
 		{
 			if (tempA > tempB)swap(tempA, tempB);
 			tempB = tempB - tempA;
 		}
-
 		result.chisl /= tempA;
 		result.znam /= tempA;
 		*this = result;

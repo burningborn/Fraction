@@ -233,7 +233,7 @@ public:
 
 	Fraction& action(Fraction& other)
 	{
-		Fraction Result;
+		Fraction Result, Temp;
 			int key = 1;
 		do
 		{
@@ -275,13 +275,14 @@ public:
 			cout << "  Префиксный инкремент \n";
 			Result = *this;
 			++Result;
-			cout << "\n  Префиксный инкремент числа А равен: ";
+			cout << "\n  Префиксный инкремент числа ++А равен: ";
 			break;
 		case 6:
 			cout << "  Постфиксный инкремент \n";
 			Result = *this;
-			Result++;
-			cout << "\n  Постфиксный инкремент числа А равен: ";
+			Temp = Result++;
+			cout << "\n  Постфиксный инкремент Temp = А++ равен:"; Temp.print();
+			cout << "\n  Постфиксный инкремент числа  А++ равен: ";
 			break;
 		case 7:
 			cout << "  Префиксный декремент \n";
@@ -292,8 +293,9 @@ public:
 		case 8:
 			cout << "  Постфиксный декремент \n";
 			Result = *this;
-			Result--;
-			cout << "\n  Постфиксный декремент числа А равен: ";
+			Temp = Result--;
+			cout << "\n  Постфиксный декремент Temp = А-- равен:"; Temp.print();
+			cout << "\n  Постфиксный декремент числа  А-- равен: ";
 			break;
 		case 9:
 			cout << "  Прибавить - равно \n";

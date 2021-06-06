@@ -111,54 +111,40 @@ public:
 
 	Fraction& operator ++() //prefix increment
 	{
-		
-		Fraction One, Two;
-
-		One.chisl = this->chisl;
+		Fraction Sum, One;
+		One.chisl = this->znam;
 		One.znam = this->znam;
-		Two.chisl = this->znam;
-		Two.znam = this->znam;
-		
-		*this = One + Two;
+		Sum = *this + One;
+		*this = Sum;
 		return *this;
 	}
 
 	Fraction& operator ++(int value) //postfix increment
 	{
-		Fraction result(*this);
-		Fraction One, Two;
-		One.chisl = this->chisl;
+		Fraction Sum, One, Temp(*this);
+		One.chisl = this->znam;
 		One.znam = this->znam;
-		Two.chisl = this->znam;
-		Two.znam = this->znam;
-
-		*this = One + Two;
-		return result;
+		Sum = *this + One;
+		*this = Sum;
+		return Temp;
 	}
 
 	Fraction& operator --() //prefix decrement
 	{
-		Fraction One, Two;
-		One.chisl = this->chisl;
+		Fraction Difference, One;
+		One.chisl = this->znam;
 		One.znam = this->znam;
-		Two.chisl = this->znam;
-		Two.znam = this->znam;
-
-		*this = One - Two;
+		*this = *this - One;
 		return *this;
 	}
 
 	Fraction& operator --(int value) //postfix decrement
 	{
-		Fraction result(*this);
-		Fraction One, Two;
-		One.chisl = this->chisl;
+		Fraction Difference, One, Temp(*this);
+		One.chisl = this->znam;
 		One.znam = this->znam;
-		Two.chisl = this->znam;
-		Two.znam = this->znam;
-
-		*this = One - Two;
-		return result;
+		*this = *this - One;
+		return Temp;
 	}
 
 	Fraction operator +=(const Fraction& other)
